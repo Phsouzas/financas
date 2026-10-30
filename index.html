@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#14402f"><title>Minhas Finanças</title>
+<style>
+:root{--bg:#efede5;--c:#fbfaf6;--g:#14402f;--g2:#2f7a52;--g3:#a9c98b;--t:#16251e;--m:#7b857f;--r:#c0453a;--b:#e6e3d8}
+[data-d]{--bg:#0d1914;--c:#16261f;--t:#eef2ec;--m:#93a39a;--b:#243b31;--g:#1f5c42}
+*{box-sizing:border-box;margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+body{background:var(--bg);color:var(--t);display:flex;justify-content:center}
+#app{width:100%;max-width:440px;min-height:100vh;padding:16px 16px 110px}
+small,i{color:var(--m);font-size:12px;font-style:normal;display:block}
+.hd{display:flex;justify-content:space-between;align-items:center;padding:10px 2px}
+.chips{display:flex;gap:8px;margin:8px 0;overflow-x:auto;align-items:center}
+.ch,.seg button{border:0;background:var(--c);color:var(--t);padding:8px 14px;border-radius:20px;font-size:13px;white-space:nowrap}
+.ch.on,.seg button.on{background:var(--g);color:#fff}
+input,select{width:100%;padding:13px;border-radius:14px;border:1px solid var(--b);background:var(--c);color:var(--t);margin:6px 0;font-size:15px}
+.chips input{width:auto;margin:0;padding:7px}
+.bal{background:var(--g);color:#fff;border-radius:22px;padding:20px;margin:10px 0}
+.bal small,.bal i{color:#cfe3d4}.bal h1{font-size:34px;margin:6px 0 14px}
+.row3{display:flex;justify-content:space-between;font-size:14px}
+.card{background:var(--c);border-radius:20px;padding:6px 14px;margin:8px 0}
+.pad{padding:16px}
+.sec{display:flex;justify-content:space-between;margin:18px 2px 6px}
+.tx{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--b)}.tx:last-child{border:0}
+.ic{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--g);color:#fff;flex:none}
+.tx>div:nth-child(2){flex:1}.tx b{font-size:14px}
+.pos{color:var(--g2)}.neg{color:var(--r)}
+.al{background:#e4eed6;color:#1d4a33;border-radius:16px;padding:12px 14px;margin:6px 0;font-size:13px}
+[data-d] .al{background:#1c3a2c;color:#cfe3d4}
+.bt{width:100%;padding:15px;border:0;border-radius:16px;background:var(--g);color:#fff;font-size:16px;margin-top:10px}
+.ln{width:100%;background:none;border:0;color:var(--m);padding:12px}
+.lg{position:fixed;inset:0;background:linear-gradient(160deg,#0f3324,#1f5c42 60%,#14402f);color:#fff;padding:60px 28px;overflow:auto;display:flex;flex-direction:column;align-items:center}
+.lg>div{width:100%;max-width:400px}.lg h1{font-size:44px;line-height:1.05}.lg h1 span{color:var(--g3)}
+.lg p{margin:14px 0 24px;color:#cfe3d4}.lg input{background:#fffdf6;color:#16251e}.lg .bt{background:#fbfaf6;color:#14402f}
+nav{position:fixed;bottom:0;width:100%;max-width:440px;background:var(--c);display:flex;justify-content:space-around;align-items:center;padding:8px 6px 18px;border-radius:24px 24px 0 0;box-shadow:0 -4px 20px #0001}
+nav button{background:none;border:0;color:var(--m);font-size:11px;display:grid;gap:2px;justify-items:center}
+nav button.on{color:var(--t);font-weight:700}nav button span{font-size:20px}
+nav .fab{width:54px;height:54px;border-radius:50%;background:var(--g);color:#fff;font-size:26px;margin-top:-26px}
+#md{position:fixed;inset:0;background:#0007;display:flex;align-items:flex-end;justify-content:center}#md:empty{display:none}
+.sh{background:var(--c);width:100%;max-width:440px;border-radius:24px 24px 0 0;padding:18px}
+.seg{display:flex;gap:6px}.seg button{flex:1;background:var(--bg)}
+.bar{height:8px;background:var(--b);border-radius:6px;overflow:hidden;margin:6px 0 12px}.bar div{height:100%;background:var(--g2)}
+.lgd{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;font-size:12px;margin:10px 0}.lgd b{float:right}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.tr{display:flex;align-items:flex-end;gap:10px;height:120px;margin:10px 0}.tr div{flex:1;text-align:center;font-size:11px;color:var(--m)}
+.tr em{display:inline-block;width:42%;border-radius:6px 6px 0 0;vertical-align:bottom}
+.mt{display:flex;gap:10px;align-items:center}.mt input{width:130px}
+</style></head><body><div id="app"></div><div id="md"></div>
+<script>
+const API='COLE_AQUI_A_URL_DO_APPS_SCRIPT'; // URL do app da Web (termina em /exec)
+const $=s=>document.querySelector(s);
+const fm=v=>'R$ '+(+v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const hoje=()=>new Date().toLocaleDateString('sv-SE');
+const CG=['Moradia','Alimentação','Transporte','Compras','Lazer','Saúde','Contas','Outros'],
+CL={gasto:CG,ganho:['Salário','Extra','Rendimentos'],invest:['Renda fixa','Ações','FIIs','Cripto','Outros']},
+COR=['#14402f','#2f7a52','#5ea876','#a9c98b','#8fa89a','#c9d9b8','#6b8f71','#3d5a4a'];
+let S={t:'',u:null,l:[],m:[],v:'home',w:'todos',mes:hoje().slice(0,7),d:0};
+try{S.t=localStorage.t||'';S.d=+localStorage.d||0}catch(e){}
+const save=(k,v)=>{try{localStorage[k]=v}catch(e){}};
+async function api(a,p={}){try{const r=await fetch(API,{method:'POST',body:JSON.stringify({a,t:S.t,...p})});return await r.json()}catch(e){return{err:'rede'}}}
+const sum=(a,t)=>a.filter(x=>x.tipo==t).reduce((s,x)=>s+ +x.valor,0);
+const items=(m=S.mes,w=S.w)=>S.l.filter(x=>String(x.data).slice(0,7)==m&&(w=='todos'||x.usuario==w));
+const theme=()=>document.documentElement.toggleAttribute('data-d',!!S.d);
+
+function login(msg=''){theme();$('#app').innerHTML=`<div class=lg><div><h1>Seu Dinheiro,<br><span>Melhores Dias</span></h1><p>Controle gastos, ganhos e investimentos da família em um só lugar.</p>
+<input id=e type=email placeholder="E-mail" autocomplete=username><input id=s type=password placeholder="Senha" autocomplete=current-password>
+<small style="color:#ffb4a8">${msg}</small><button class=bt onclick=entrar()>Entrar →</button></div></div>`;$('#md').innerHTML=''}
+async function entrar(){const r=await api('login',{email:$('#e').value,senha:$('#s').value});if(r.err)return login(r.err=='auth'?'E-mail ou senha inválidos':'Erro de conexão');S.t=r.t;save('t',r.t);load()}
+async function load(){const r=await api('lista');if(r.err)return login();S.u=r.u;S.l=r.l.sort((a,b)=>a.data<b.data?1:-1);S.m=r.m;go()}
+function sair(){S.t='';save('t','');login()}
+
+function lembretes(){const mine=items(S.mes,S.u.nome),a=[];
+if(!S.m.length)a.push('🎯 Você ainda não configurou suas metas. Vá em Metas.');
+else if(!S.m.some(x=>x.mes_lancado==hoje().slice(0,7)))a.push('🎯 Você não atualizou suas metas neste mês.');
+if(!mine.length)a.push('📝 Você ainda não fez lançamentos neste mês.');
+else{const dias=Math.floor((Date.now()-new Date(S.l.find(x=>x.usuario==S.u.nome).data))/864e5);if(dias>3)a.push(`⏰ Faz ${dias} dias sem lançamentos seus.`)}
+const mi=S.m.find(x=>x.categoria=='INVESTIR'),inv=sum(mine,'invest');
+if(mi&&inv<mi.valor)a.push(`📈 Faltam ${fm(mi.valor-inv)} para sua meta de investimento.`);
+return a.map(x=>`<div class=al>${x}</div>`).join('')}
+
+const filtros=()=>{const us=[...new Set([S.u.nome,...S.l.map(x=>x.usuario)])];
+return `<div class=chips><input type=month value="${S.mes}" onchange="S.mes=this.value;go()">${['todos',...us].map(u=>`<button class="ch ${S.w==u?'on':''}" onclick="S.w='${u}';go()">${u=='todos'?'Todos':u}</button>`).join('')}</div>`};
+const lista=a=>a.length?a.map(x=>{const n=x.tipo!='ganho',ic={gasto:'↓',ganho:'↑',invest:'◆'}[x.tipo];
+return `<div class=tx onclick="del('${x.id}')"><div class=ic>${ic}</div><div><b>${x.descricao}</b><small>${x.categoria} · ${x.usuario}${x.origem=='atalho'?' · ⚡auto':''}</small></div><div style="text-align:right"><b class="${n?'neg':'pos'}">${n?'-':'+'} ${fm(x.valor)}</b><small>${String(x.data).slice(8,10)}/${String(x.data).slice(5,7)}</small></div></div>`}).join(''):'<p class=pad><small>Nenhum lançamento neste período.</small></p>';
+
+function home(){const it=items(),g=sum(it,'ganho'),d=sum(it,'gasto'),i=sum(it,'invest');
+return `<div class=hd><div><b style="font-size:18px">Olá, ${S.u.nome}</b><small>Vamos construir um futuro melhor</small></div></div>${filtros()}
+<div class=bal><small>Saldo do mês</small><h1>${fm(g-d-i)}</h1><div class=row3><span>↑ ${fm(g)}<i>Ganhos</i></span><span>↓ ${fm(d)}<i>Gastos</i></span><span>◆ ${fm(i)}<i>Investido</i></span></div></div>
+${lembretes()}<div class=sec><b>Transações recentes</b></div><div class=card>${lista(it.slice(0,15))}</div>`}
+
+function ana(){const it=items().filter(x=>x.tipo=='gasto'),tot=sum(it,'gasto'),
+by=CG.map(c=>[c,it.filter(x=>x.categoria==c).reduce((s,x)=>s+ +x.valor,0)]).filter(x=>x[1]>0);let off=0;
+const arcs=by.map(([c,v],k)=>{const l=v/tot*251.3,s=`<circle r=40 cx=50 cy=50 fill=none stroke="${COR[CG.indexOf(c)]}" stroke-width=14 stroke-dasharray="${l} 251.3" stroke-dashoffset="${-off}" transform="rotate(-90 50 50)"/>`;off+=l;return s}).join('');
+const ms=[...Array(6)].map((_,k)=>{const d=new Date();d.setDate(1);d.setMonth(d.getMonth()-5+k);return d.toLocaleDateString('sv-SE').slice(0,7)}),
+dt=ms.map(m=>[m,sum(items(m),'ganho'),sum(items(m),'gasto')]),mx=Math.max(1,...dt.map(x=>Math.max(x[1],x[2])));
+const lim=S.m.filter(x=>CG.includes(x.categoria)).reduce((s,x)=>s+ +x.valor,0),mine=sum(items(S.mes,S.u.nome),'gasto');
+const msg=lim?(mine<=lim?`🌱 Você está ${Math.round((1-mine/lim)*100)}% abaixo do orçamento. Ótimo!`:`⚠️ Você passou ${fm(mine-lim)} do orçamento.`):'🎯 Defina limites em Metas para acompanhar seu orçamento.';
+return `<div class=hd><b style="font-size:20px">Analytics</b></div>${filtros()}
+<div class=card style="padding:16px"><b>Seus gastos</b><div style="position:relative;max-width:230px;margin:10px auto"><svg viewBox="0 0 100 100">${arcs||'<circle r=40 cx=50 cy=50 fill=none stroke="var(--b)" stroke-width=14 />'}</svg>
+<div style="position:absolute;inset:0;display:grid;place-content:center;text-align:center"><b style="font-size:18px">${fm(tot)}</b><small>Total gasto</small></div></div>
+<div class=lgd>${by.map(([c,v])=>`<span><i class=dot style="background:${COR[CG.indexOf(c)]}"></i>${c}<b>${Math.round(v/tot*100)}%</b></span>`).join('')}</div></div>
+<div class=al>${msg}</div>
+<div class=card style="padding:16px"><b>Ganhos × Gastos (6 meses)</b><div class=tr>${dt.map(([m,g,d])=>`<div><em style="height:${g/mx*100}px;background:var(--g3)"></em><em style="height:${d/mx*100}px;background:var(--g)"></em><br>${m.slice(5)}/${m.slice(2,4)}</div>`).join('')}</div><small>Claro = ganhos · Escuro = gastos</small></div>
+<div class=card style="padding:16px"><b>Maiores gastos</b>${lista([...it].sort((a,b)=>b.valor-a.valor).slice(0,5))}</div>`}
+
+function metas(){const mine=items(S.mes,S.u.nome),mv=k=>(S.m.find(x=>x.categoria==k)||{}).valor||'';
+const row=(k,nome,real,inv)=>{const v=+mv(k),p=v?Math.min(100,real/v*100):0,bad=!inv&&v&&real>v;
+return `<div><div class=mt><b style="flex:1">${nome}</b><input data-k="${k}" type=number inputmode=decimal placeholder="Meta R$" value="${mv(k)}"></div>${v?`<div class=bar><div style="width:${p}%;${bad?'background:var(--r)':''}"></div></div><small>${fm(real)} de ${fm(v)}</small>`:''}</div>`};
+return `<div class=hd><b style="font-size:20px">Metas</b></div><small>Valores mensais de ${S.u.nome}. Gastos = limite; Ganhos/Investir = objetivo.</small>
+<div class=card style="padding:16px;display:grid;gap:10px">${row('GANHAR','💰 Ganhar',sum(mine,'ganho'),1)}${row('INVESTIR','📈 Investir',sum(mine,'invest'),1)}${CG.map(c=>row(c,c,mine.filter(x=>x.tipo=='gasto'&&x.categoria==c).reduce((s,x)=>s+ +x.valor,0))).join('')}</div>
+<button class=bt onclick=svMetas()>Salvar metas</button>`}
+async function svMetas(){const m=[...document.querySelectorAll('[data-k]')].filter(i=>+i.value>0).map(i=>({categoria:i.dataset.k,valor:+i.value}));await api('metas',{m});load()}
+
+function perfil(){return `<div class=hd><b style="font-size:20px">Perfil</b></div><div class=card style="padding:16px;text-align:center"><div class=ic style="margin:0 auto 8px;width:64px;height:64px;font-size:26px">${S.u.nome[0]}</div><b>${S.u.nome}</b><small>${S.u.email}</small></div>
+<div class=card style="padding:16px"><div class=mt><b style="flex:1">🌙 Modo escuro</b><button class="ch ${S.d?'on':''}" onclick="S.d=S.d?0:1;save('d',S.d);theme();go()">${S.d?'Ligado':'Desligado'}</button></div></div>
+<div class=card style="padding:16px"><b>Alterar senha</b><input id=pa type=password placeholder="Senha atual"><input id=pn type=password placeholder="Nova senha (mín. 6)"><small id=pm></small><button class=bt onclick=senha()>Atualizar senha</button></div>
+<button class=ln onclick=sair()>Sair da conta</button>`}
+async function senha(){const n=$('#pn').value;if(n.length<6)return $('#pm').textContent='A nova senha precisa ter 6+ caracteres';const r=await api('senha',{atual:$('#pa').value,nova:n});$('#pm').textContent=r.err||'Senha alterada ✔'}
+
+function addM(tp='gasto'){$('#md').innerHTML=`<div class=sh><div class=seg>${[['gasto','Gasto'],['ganho','Ganho'],['invest','Investimento']].map(([k,n])=>`<button class="${k==tp?'on':''}" onclick="addM('${k}')">${n}</button>`).join('')}</div>
+<input id=v type=number step=0.01 inputmode=decimal placeholder="Valor R$"><select id=c>${CL[tp].map(c=>`<option>${c}</option>`).join('')}</select><input id=ds placeholder="Descrição"><input id=dt type=date value="${hoje()}">
+<button class=bt onclick="sv('${tp}')">Salvar</button><button class=ln onclick="$('#md').innerHTML=''">Cancelar</button></div>`}
+async function sv(tp){const v=+$('#v').value;if(!v)return;await api('add',{x:{tipo:tp,valor:v,categoria:$('#c').value,descricao:$('#ds').value||$('#c').value,data:$('#dt').value}});$('#md').innerHTML='';load()}
+async function del(id){if(confirm('Excluir este lançamento?')){await api('del',{id});load()}}
+
+function go(){theme();const V={home,ana,metas,perfil};$('#app').innerHTML=V[S.v]()+`<nav>${[['home','⌂','Início'],['ana','▥','Analytics']].map(n=>nb(n)).join('')}<button class=fab onclick=addM()>+</button>${[['metas','◎','Metas'],['perfil','☺','Perfil']].map(n=>nb(n)).join('')}</nav>`}
+const nb=([k,i,n])=>`<button class="${S.v==k?'on':''}" onclick="S.v='${k}';go();scrollTo(0,0)"><span>${i}</span>${n}</button>`;
+S.t?load():login();
+</script></body></html>
