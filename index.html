@@ -7,8 +7,9 @@
 :root{--bg:#efede5;--c:#fbfaf6;--g:#14402f;--g2:#2f7a52;--g3:#a9c98b;--t:#16251e;--m:#7b857f;--r:#c0453a;--b:#e6e3d8}
 [data-d]{--bg:#0d1914;--c:#16261f;--t:#eef2ec;--m:#93a39a;--b:#243b31;--g:#1f5c42}
 *{box-sizing:border-box;margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
-html{-webkit-text-size-adjust:100%;width:100%;height:100%;overflow:hidden}
-body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:9}
+html{-webkit-text-size-adjust:100%;width:100%;height:100%;overflow:hidden;background:var(--c)}
+html.lgn{background:#14402f;--cover:#0f3324}
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:var(--cover,var(--bg));z-index:9}
 body{width:100%;height:100%;background:var(--bg);color:var(--t);display:flex;justify-content:center;overflow:hidden;touch-action:pan-y;overscroll-behavior:none;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
 input{-webkit-user-select:text;user-select:text}
 #app{width:100%;max-width:440px;height:100%;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:max(16px,env(safe-area-inset-top)) 16px 120px}
@@ -37,7 +38,7 @@ input,select{width:100%;padding:13px;border-radius:14px;border:1px solid var(--b
 .lg>div{width:100%;max-width:400px}.lg h1{font-size:44px;line-height:1.05}.lg h1 span{color:var(--g3)}
 .lg p{margin:14px 0 24px;color:#cfe3d4}.lg input{background:#fffdf6;color:#16251e}.lg .bt{background:#fbfaf6;color:#14402f}
 .lg .er{color:#ffb4a8;min-height:18px;font-size:13px}
-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:440px;z-index:10;background:var(--c);display:grid;grid-template-columns:repeat(5,1fr);align-items:center;padding:8px 4px calc(12px + env(safe-area-inset-bottom));border-radius:24px 24px 0 0;box-shadow:0 -4px 20px #0001}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:440px;z-index:10;background:var(--c);display:grid;grid-template-columns:repeat(5,1fr);align-items:center;padding:8px 4px var(--pb,10px);border-radius:24px 24px 0 0;box-shadow:0 -4px 20px #0001}
 nav button{background:none;border:0;color:var(--m);font-size:11px;display:grid;gap:3px;justify-items:center;min-width:0;cursor:pointer}
 nav button.on{color:var(--t);font-weight:700}nav button span{display:block;line-height:0}
 nav .fab{width:54px;height:54px;border-radius:50%;background:var(--g);color:#fff;margin:-26px auto 0;display:grid;place-items:center}nav .fab svg{display:block}
@@ -58,7 +59,7 @@ nav:empty{display:none}
 .tr{display:flex;align-items:flex-end;gap:10px;height:120px;margin:10px 0}.tr div{flex:1;text-align:center;font-size:11px;color:var(--m)}
 .tr em{display:inline-block;width:42%;border-radius:6px 6px 0 0;vertical-align:bottom}
 .mt{display:flex;gap:10px;align-items:center}.mt input{width:130px}
-</style></head><body><div id="app"></div><nav id="nv"></nav><div id="ptr"></div><div id="md"></div>
+</style></head><body><div id="app"></div><nav id="nv"></nav><div id="sb" style="position:fixed;left:0;bottom:0;visibility:hidden;pointer-events:none;padding-bottom:env(safe-area-inset-bottom)"></div><div id="ptr"></div><div id="md"></div>
 <script>
 const API='https://script.google.com/macros/s/AKfycbxkBrGavb9tFcZSem5_ycf64WRIR9-AYsnJk39gCDZoe2kfMD0dAE5HB0OvjlDVQSU29Q/exec';
 const P={"refresh":"<path d='M20 11a8 8 0 10-2.3 6.3M20 4v7h-7'/>","trash": "<path d='M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3'/>","home": "<path d=\"M3 11l9-8 9 8\"/><path d=\"M5 10v10h14V10\"/>", "chart": "<path d=\"M4 20V11M10 20V4M16 20v-6M2 20h20\"/>", "plus": "<path d=\"M12 5v14M5 12h14\"/>", "target": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"12\" cy=\"12\" r=\"5\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/>", "user": "<circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7\"/>", "down": "<path d=\"M12 5v14M6 13l6 6 6-6\"/>", "up": "<path d=\"M12 19V5M6 11l6-6 6 6\"/>", "trend": "<path d=\"M3 17l6-6 4 4 8-8M15 7h6v6\"/>", "note": "<path d=\"M5 3h14v18H5zM9 8h6M9 12h6M9 16h3\"/>", "clock": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5l3 2\"/>", "leaf": "<path d=\"M5 19c0-9 5-14 15-14 0 10-5 15-14 15M5 19l8-8\"/>", "alert": "<path d=\"M12 3l10 18H2zM12 10v5M12 18v.5\"/>", "moon": "<path d=\"M20 14A8 8 0 1110 4a7 7 0 0010 10z\"/>", "bolt": "<path d=\"M13 2L4 14h7l-1 8 9-12h-7z\"/>", "coin": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v10M9.5 9.5h4a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3h4\"/>"};
@@ -79,7 +80,7 @@ const sum=(a,t)=>a.filter(x=>x.tipo==t).reduce((s,x)=>s+ +x.valor,0);
 const items=(m=S.mes,w=S.w)=>S.l.filter(x=>String(x.data).slice(0,7)==m&&(w=='todos'||x.usuario==w));
 const theme=()=>document.documentElement.toggleAttribute('data-d',!!S.d);
 
-function login(msg=''){theme();$('#nv').innerHTML='';$('#app').innerHTML=`<div class=lg><div><h1>Seu Dinheiro,<br><span>Melhores Dias</span></h1><p>Controle gastos, ganhos e investimentos da família em um só lugar.</p>
+function login(msg=''){theme();document.documentElement.classList.add('lgn');$('#nv').innerHTML='';$('#app').innerHTML=`<div class=lg><div><h1>Seu Dinheiro,<br><span>Melhores Dias</span></h1><p>Controle gastos, ganhos e investimentos da família em um só lugar.</p>
 <input id=e type=email placeholder="E-mail" autocomplete=username autocapitalize=off><input id=s type=password placeholder="Senha" autocomplete=current-password onkeydown="if(event.key=='Enter')entrar()">
 <div class=er>${msg}</div><button class=bt id=bl onclick=entrar()>Entrar →</button></div></div>`;$('#md').innerHTML=''}
 async function entrar(){const b=$('#bl');b.textContent='Entrando...';const r=await api('login',{email:$('#e').value,senha:$('#s').value});if(r.err)return login({email:'E-mail não cadastrado',senha:'Senha incorreta',auth:'E-mail ou senha inválidos',bloqueado:'Muitas tentativas. Aguarde 15 minutos.',config:'Servidor sem SALT configurado (veja o Code.gs)',rede:'Sem conexão com o servidor (confira a implantação do Apps Script)'}[r.err]||'Erro: '+r.err);S.t=r.t;save('t',r.t);document.activeElement&&document.activeElement.blur();fixaTela();load()}
@@ -133,7 +134,7 @@ async function svMetas(){const m=[...document.querySelectorAll('[data-k]')].filt
 function perfil(){setTimeout(()=>{ancora();const e=$('#dg');if(e)e.textContent='diag: '+(window.__d||[]).join(' / ')},200);return `<div class=hd><b style="font-size:20px">Perfil</b></div><div class=card style="padding:16px;text-align:center"><div class=ic style="margin:0 auto 8px;width:64px;height:64px;font-size:26px">${S.u.nome[0]}</div><b>${S.u.nome}</b><small>${S.u.email}</small></div>
 <div class=card style="padding:16px"><div class=mt><b style="flex:1">${svg('moon',18)} Modo escuro</b><button class="ch ${S.d?'on':''}" onclick="S.d=S.d?0:1;save('d',S.d);theme();go()">${S.d?'Ligado':'Desligado'}</button></div></div>
 <div class=card style="padding:16px"><b>Alterar senha</b><input id=pa type=password placeholder="Senha atual"><input id=pn type=password placeholder="Nova senha (mín. 6)"><small id=pm></small><button class=bt onclick=senha()>Atualizar senha</button></div>
-<button class=ln onclick=sair()>Sair da conta</button><small style="text-align:center">Versão 6</small><small id=dg style="text-align:center;font-size:10px;opacity:.7"></small>`}
+<button class=ln onclick=sair()>Sair da conta</button><small style="text-align:center">Versão 7</small><small id=dg style="text-align:center;font-size:10px;opacity:.7"></small>`}
 async function senha(){const n=$('#pn').value;if(n.length<6)return $('#pm').textContent='A nova senha precisa ter 6+ caracteres';const r=await api('senha',{atual:$('#pa').value,nova:n});$('#pm').textContent=r.err||'Senha alterada com sucesso'}
 
 function addM(tp='gasto'){$('#md').innerHTML=`<div class=sh><div class=seg>${[['gasto','Gasto'],['ganho','Ganho'],['invest','Investimento']].map(([k,n])=>`<button class="${k==tp?'on':''}" onclick="addM('${k}')">${n}</button>`).join('')}</div>
@@ -155,14 +156,14 @@ document.addEventListener('touchstart',e=>{const t=e.target.closest('.sw>.tx');i
 document.addEventListener('touchmove',e=>{if(!cur)return;dx=e.touches[0].clientX-sx;const dy=e.touches[0].clientY-sy;if(!mv&&Math.abs(dx)>10&&Math.abs(dx)>Math.abs(dy))mv=true;if(mv)cur.style.transform=`translateX(${Math.max(-72,Math.min(0,(cur===aberto?-72:0)+dx))}px)`},{passive:true});
 document.addEventListener('touchend',()=>{if(!cur)return;cur.style.transition='';if(mv){swiped=true;setTimeout(()=>swiped=false,350);if((cur===aberto?-72:0)+dx<-36){cur.style.transform='translateX(-72px)';aberto=cur}else{cur.style.transform='';if(aberto===cur)aberto=null}}cur=null});
 
-function go(){theme();const V={home,ana,metas,perfil};$('#app').innerHTML=`<div id=pg>${V[S.v]()}</div>`;$('#nv').innerHTML=`${[['home','home','Início'],['ana','chart','Analytics']].map(nb).join('')}<button class=fab onclick=addM()>${svg('plus',28)}</button>${[['metas','target','Metas'],['perfil','user','Perfil']].map(nb).join('')}`;ancora()}
+function go(){theme();document.documentElement.classList.remove('lgn');const V={home,ana,metas,perfil};$('#app').innerHTML=`<div id=pg>${V[S.v]()}</div>`;$('#nv').innerHTML=`${[['home','home','Início'],['ana','chart','Analytics']].map(nb).join('')}<button class=fab onclick=addM()>${svg('plus',28)}</button>${[['metas','target','Metas'],['perfil','user','Perfil']].map(nb).join('')}`;ancora()}
 const nb=([k,i,n])=>`<button class="${S.v==k?'on':''}" onclick="S.v='${k}';go();$('#app').scrollTop=0"><span>${svg(i,24)}</span>${n}</button>`;
 
-// Cola o menu na base REAL da tela (corrige o espaço vazio embaixo no iPhone)
-function ancora(){const n=$('#nv');if(!n||!n.innerHTML)return;const v=window.visualViewport,sa=navigator.standalone;
+// Ajusta o menu à base da tela (a zona do indicador do iPhone fica na mesma cor do menu)
+function ancora(){const n=$('#nv');if(!n||!n.innerHTML)return;const v=window.visualViewport,sa=!!navigator.standalone;
 if(v&&v.height<Math.max(innerHeight,screen.height)*.75){n.style.display='none';return}n.style.display='';n.style.bottom='0px';
-const alvo=sa?screen.height:(v?v.offsetTop+v.height:innerHeight),gap=alvo-n.getBoundingClientRect().bottom;window.__d=[innerHeight,screen.height,v?Math.round(v.height):'-',v?Math.round(v.offsetTop):'-',sa?'app':'safari',Math.round(gap)];
-if(gap>2&&gap<160)n.style.bottom=(-gap)+'px'}
+const sb=parseFloat(getComputedStyle($('#sb')).paddingBottom)||0,dz=sa?Math.max(0,screen.height-innerHeight):0;
+n.style.setProperty('--pb',Math.max(8,sb-dz)+'px');window.__d=[innerHeight,screen.height,v?Math.round(v.height):'-',sb,Math.round(dz),sa?'app':'safari']}
 ['resize','orientationchange','focusout','pageshow'].forEach(e=>addEventListener(e,()=>{ancora();setTimeout(ancora,150);setTimeout(ancora,600)}));
 if(window.visualViewport){visualViewport.addEventListener('resize',ancora);visualViewport.addEventListener('scroll',ancora)}
 setInterval(ancora,1500);
