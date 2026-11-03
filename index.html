@@ -7,12 +7,12 @@
 :root{--bg:#efede5;--c:#fbfaf6;--g:#14402f;--g2:#2f7a52;--g3:#a9c98b;--t:#16251e;--m:#7b857f;--r:#c0453a;--b:#e6e3d8}
 [data-d]{--bg:#0d1914;--c:#16261f;--t:#eef2ec;--m:#93a39a;--b:#243b31;--g:#1f5c42}
 *{box-sizing:border-box;margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
-html{-webkit-text-size-adjust:100%;width:100%;height:100%;overflow:hidden;background:var(--c)}
+html{-webkit-text-size-adjust:100%;width:100%;height:100%;height:100dvh;overflow:hidden;background:var(--c)}
 html.lgn{background:#14402f;--cover:#0f3324}
 body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:var(--cover,var(--bg));z-index:9}
-body{width:100%;height:100%;background:var(--bg);color:var(--t);display:flex;justify-content:center;overflow:hidden;touch-action:pan-y;overscroll-behavior:none;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+body{width:100%;height:100%;height:100dvh;background:var(--bg);color:var(--t);display:block;overflow:hidden;touch-action:pan-y;overscroll-behavior:none;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
 input{-webkit-user-select:text;user-select:text}
-#app{width:100%;max-width:440px;height:100%;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:max(16px,env(safe-area-inset-top)) 16px 120px}
+#app{display:block;width:100%;max-width:600px;height:100%;height:100dvh;margin:0 auto;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:calc(16px + env(safe-area-inset-top)) 16px calc(130px + env(safe-area-inset-bottom));}
 small,i{color:var(--m);font-size:12px;font-style:normal;display:block}
 .hd{display:flex;justify-content:space-between;align-items:center;padding:10px 2px}
 .chips{display:flex;gap:8px;margin:8px 0;overflow-x:auto;align-items:center}
@@ -22,7 +22,7 @@ input,select{width:100%;padding:13px;border-radius:14px;border:1px solid var(--b
 .chips input{width:auto;margin:0;padding:7px}
 .bal{background:var(--g);color:#fff;border-radius:22px;padding:20px;margin:10px 0}
 .bal small,.bal i{color:#cfe3d4}.bal h1{font-size:34px;margin:6px 0 14px}
-.row3{display:flex;justify-content:space-between;font-size:14px}
+.row3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;font-size:13px}.row3>span{min-width:0;overflow-wrap:anywhere}
 .card{background:var(--c);border-radius:20px;padding:6px 14px;margin:8px 0}
 .pad{padding:16px}
 .sec{display:flex;justify-content:space-between;margin:18px 2px 6px}
@@ -38,10 +38,10 @@ input,select{width:100%;padding:13px;border-radius:14px;border:1px solid var(--b
 .lg>div{width:100%;max-width:400px}.lg h1{font-size:44px;line-height:1.05}.lg h1 span{color:var(--g3)}
 .lg p{margin:14px 0 24px;color:#cfe3d4}.lg input{background:#fffdf6;color:#16251e}.lg .bt{background:#fbfaf6;color:#14402f}
 .lg .er{color:#ffb4a8;min-height:18px;font-size:13px}
-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:440px;height:calc(90px + var(--pb,8px));z-index:10;pointer-events:none}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:600px;height:calc(90px + env(safe-area-inset-bottom));z-index:10;pointer-events:none}
 #nsv{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 -3px 12px rgba(0,0,0,.09))}
 #nbar{fill:var(--c)}
-nav button{position:absolute;top:26px;width:20%;height:64px;background:none;border:0;color:var(--m);display:grid;place-items:center;pointer-events:auto;cursor:pointer}
+nav button{position:absolute;top:20px;width:20%;height:64px;background:none;border:0;color:var(--m);display:grid;place-items:center;pointer-events:auto;cursor:pointer}
 nav button svg{opacity:.9;transition:opacity .16s}nav button.hide svg{opacity:0}
 .bub{position:absolute;left:0;top:0;width:54px;height:54px;border-radius:50%;background:var(--c);color:var(--t);display:grid;place-items:center;box-shadow:0 5px 14px rgba(0,0,0,.2);will-change:transform;pointer-events:none;opacity:0}
 .fd{animation:fi .3s ease}@keyframes fi{from{opacity:0;transform:translateY(8px)}}
@@ -65,7 +65,7 @@ nav:empty{display:none}
 .mt{display:flex;gap:10px;align-items:center}.mt input{width:130px}
 </style></head><body><div id="app"></div><nav id="nv"></nav><div id="sb" style="position:fixed;left:0;bottom:0;visibility:hidden;pointer-events:none;padding-bottom:env(safe-area-inset-bottom)"></div><div id="ptr"></div><div id="md"></div>
 <script>
-const API='https://script.google.com/macros/s/AKfycbxkBrGavb9tFcZSem5_ycf64WRIR9-AYsnJk39gCDZoe2kfMD0dAE5HB0OvjlDVQSU29Q/exec';
+const API='https://script.google.com/macros/s/AKfycbyaMArG_cfv3yzuVE5EfWGkm0weXQgcfxgXoKi85deVyOxTcHb0XOHGcdtXeaNCbKvdrQ/exec';
 const P={"refresh":"<path d='M20 11a8 8 0 10-2.3 6.3M20 4v7h-7'/>","trash": "<path d='M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3'/>","home": "<path d=\"M3 11l9-8 9 8\"/><path d=\"M5 10v10h14V10\"/>", "chart": "<path d=\"M4 20V11M10 20V4M16 20v-6M2 20h20\"/>", "plus": "<path d=\"M12 5v14M5 12h14\"/>", "target": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"12\" cy=\"12\" r=\"5\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/>", "user": "<circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7\"/>", "down": "<path d=\"M12 5v14M6 13l6 6 6-6\"/>", "up": "<path d=\"M12 19V5M6 11l6-6 6 6\"/>", "trend": "<path d=\"M3 17l6-6 4 4 8-8M15 7h6v6\"/>", "note": "<path d=\"M5 3h14v18H5zM9 8h6M9 12h6M9 16h3\"/>", "clock": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5l3 2\"/>", "leaf": "<path d=\"M5 19c0-9 5-14 15-14 0 10-5 15-14 15M5 19l8-8\"/>", "alert": "<path d=\"M12 3l10 18H2zM12 10v5M12 18v.5\"/>", "moon": "<path d=\"M20 14A8 8 0 1110 4a7 7 0 0010 10z\"/>", "bolt": "<path d=\"M13 2L4 14h7l-1 8 9-12h-7z\"/>", "coin": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v10M9.5 9.5h4a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3h4\"/>"};
 const svg=(n,z=20)=>`<svg width=${z} height=${z} viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=1.9 stroke-linecap=round stroke-linejoin=round style="vertical-align:middle">${P[n]}</svg>`;
 document.addEventListener('gesturestart',e=>e.preventDefault());
@@ -207,190 +207,9 @@ function navSync(){if(!$('#nsv'))return navBuild();const i=tabIdx();if(i>=0&&i!=
 function navClick(i){if(i==2){navSel(2);addM();return}const k=TABS[i][0];if(S.v==k&&NA==i)return;S.v=k;S.fade=1;go();$('#app').scrollTop=0}
 
 // Ajusta o menu à base da tela (a zona do indicador do iPhone fica na mesma cor do menu)
-function ancora(){const n=$('#nv');if(!n||!n.innerHTML)return;const v=window.visualViewport,sa=!!navigator.standalone;
-if(v&&v.height<Math.max(innerHeight,screen.height)*.75){n.style.display='none';return}n.style.display='';n.style.bottom='0px';
-const sb=parseFloat(getComputedStyle($('#sb')).paddingBottom)||0,dz=sa?Math.max(0,screen.height-innerHeight):0;
-n.style.setProperty('--pb',Math.max(8,sb-dz)+'px');navPlace();window.__d=[innerHeight,screen.height,v?Math.round(v.height):'-',sb,Math.round(dz),sa?'app':'safari']}
-['resize','orientationchange','focusout','pageshow'].forEach(e=>addEventListener(e,()=>{ancora();setTimeout(ancora,150);setTimeout(ancora,600)}));
-if(window.visualViewport){visualViewport.addEventListener('resize',ancora);visualViewport.addEventListener('scroll',ancora)}
-setInterval(ancora,1500);
-let py=0,px=0,pl=0,pa=false;
-const pgE=()=>$('#pg'),ptrE=$('#ptr');
-document.addEventListener('touchstart',e=>{pa=!!S.u&&!$('#md').innerHTML&&$('#app').scrollTop<=0;py=e.touches[0].clientY;px=e.touches[0].clientX;pl=0},{passive:true});
-document.addEventListener('touchmove',e=>{if(!pa||!pgE())return;const dy=e.touches[0].clientY-py,dx=e.touches[0].clientX-px;
-if(dy<=0||Math.abs(dx)>dy||$('#app').scrollTop>0){if(dy<=0)pa=false;return}
-pl=Math.min(dy*.5,80);pgE().style.transition='none';pgE().style.transform=`translateY(${pl}px)`;
-ptrE.innerHTML=svg('refresh',20);ptrE.style.opacity=Math.min(1,pl/50);ptrE.style.transform=`translateY(${pl-8}px) rotate(${pl*4}deg)`},{passive:true});
-document.addEventListener('touchend',()=>{if(!pa||!pgE())return;pa=false;const g=pgE();g.style.transition='transform .25s';
-if(pl>=55){g.style.transform='translateY(44px)';ptrE.classList.add('on');ptrE.style.transform='translateY(8px)';ptrE.style.opacity=1;setTimeout(()=>location.reload(),350)}
-else{g.style.transform='';ptrE.style.opacity=0;ptrE.style.transform='translateY(-50px)'}pl=0});
-S.t?load():login();
-</script></body></html><!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#14402f"><title>Minhas Finanças</title>
-<style>
-:root{--bg:#efede5;--c:#fbfaf6;--g:#14402f;--g2:#2f7a52;--g3:#a9c98b;--t:#16251e;--m:#7b857f;--r:#c0453a;--b:#e6e3d8}
-[data-d]{--bg:#0d1914;--c:#16261f;--t:#eef2ec;--m:#93a39a;--b:#243b31;--g:#1f5c42}
-*{box-sizing:border-box;margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
-html{-webkit-text-size-adjust:100%;width:100%;height:100%;overflow:hidden;background:var(--c)}
-html.lgn{background:#14402f;--cover:#0f3324}
-body::before{content:'';position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:var(--cover,var(--bg));z-index:9}
-body{width:100%;height:100%;background:var(--bg);color:var(--t);display:flex;justify-content:center;overflow:hidden;touch-action:pan-y;overscroll-behavior:none;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
-input{-webkit-user-select:text;user-select:text}
-#app{width:100%;max-width:440px;height:100%;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:max(16px,env(safe-area-inset-top)) 16px 120px}
-small,i{color:var(--m);font-size:12px;font-style:normal;display:block}
-.hd{display:flex;justify-content:space-between;align-items:center;padding:10px 2px}
-.chips{display:flex;gap:8px;margin:8px 0;overflow-x:auto;align-items:center}
-.ch,.seg button{border:0;background:var(--c);color:var(--t);padding:8px 14px;border-radius:20px;font-size:13px;white-space:nowrap}
-.ch.on,.seg button.on{background:var(--g);color:#fff}
-input,select{width:100%;padding:13px;border-radius:14px;border:1px solid var(--b);background:var(--c);color:var(--t);margin:6px 0;font-size:16px}
-.chips input{width:auto;margin:0;padding:7px}
-.bal{background:var(--g);color:#fff;border-radius:22px;padding:20px;margin:10px 0}
-.bal small,.bal i{color:#cfe3d4}.bal h1{font-size:34px;margin:6px 0 14px}
-.row3{display:flex;justify-content:space-between;font-size:14px}
-.card{background:var(--c);border-radius:20px;padding:6px 14px;margin:8px 0}
-.pad{padding:16px}
-.sec{display:flex;justify-content:space-between;margin:18px 2px 6px}
-.tx{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--b)}.tx:last-child{border:0}
-.ic svg,.al svg{flex:none}.mt b svg{margin-right:6px}.ic{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--g);color:#fff;flex:none}
-.tx>div:nth-child(2){flex:1}.tx b{font-size:14px}
-.pos{color:var(--g2)}.neg{color:var(--r)}
-.al{display:flex;gap:10px;align-items:center;background:#e4eed6;color:#1d4a33;border-radius:16px;padding:12px 14px;margin:6px 0;font-size:13px}
-[data-d] .al{background:#1c3a2c;color:#cfe3d4}
-.bt{width:100%;padding:15px;border:0;border-radius:16px;background:var(--g);color:#fff;font-size:16px;margin-top:10px}
-.ln{width:100%;background:none;border:0;color:var(--m);padding:12px}
-.lg{position:fixed;inset:0;background:linear-gradient(160deg,#0f3324,#1f5c42 60%,#14402f);color:#fff;padding:max(36px,calc(16px + env(safe-area-inset-top))) 28px 28px;overflow:auto;display:flex;flex-direction:column;align-items:center}
-.lg>div{width:100%;max-width:400px}.lg h1{font-size:44px;line-height:1.05}.lg h1 span{color:var(--g3)}
-.lg p{margin:14px 0 24px;color:#cfe3d4}.lg input{background:#fffdf6;color:#16251e}.lg .bt{background:#fbfaf6;color:#14402f}
-.lg .er{color:#ffb4a8;min-height:18px;font-size:13px}
-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:440px;z-index:10;background:var(--c);display:grid;grid-template-columns:repeat(5,1fr);align-items:center;padding:8px 4px var(--pb,10px);border-radius:24px 24px 0 0;box-shadow:0 -4px 20px #0001}
-nav button{background:none;border:0;color:var(--m);font-size:11px;display:grid;gap:3px;justify-items:center;min-width:0;cursor:pointer}
-nav button.on{color:var(--t);font-weight:700}nav button span{display:block;line-height:0}
-nav .fab{width:54px;height:54px;border-radius:50%;background:var(--g);color:#fff;margin:-26px auto 0;display:grid;place-items:center}nav .fab svg{display:block}
-.sw{position:relative;overflow:hidden;border-bottom:1px solid var(--b)}.sw:last-child{border:0}
-.sw .tx{position:relative;background:var(--c);border:0;transition:transform .2s;touch-action:pan-y}
-.trash{position:absolute;right:0;top:6px;bottom:6px;width:64px;border:0;border-radius:14px;background:var(--r);color:#fff;display:grid;place-items:center}
-.cat{padding:12px 0;border-bottom:1px solid var(--b)}.cat:last-child{border:0}.cat .bar{margin:8px 0 2px}
-nav:empty{display:none}
-#ptr{position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 6px);width:38px;height:38px;margin-left:-19px;border-radius:50%;background:var(--c);color:var(--g2);display:grid;place-items:center;box-shadow:0 2px 10px #0003;opacity:0;pointer-events:none;z-index:20;transform:translateY(-50px)}
-#ptr.on svg{animation:gi .8s linear infinite}@keyframes gi{to{transform:rotate(360deg)}}
-#pg{will-change:transform}
-#md{position:fixed;inset:0;z-index:30;background:#0007;display:flex;align-items:flex-start;justify-content:center}#md:empty{display:none}
-.sh{background:var(--c);width:100%;max-width:440px;border-radius:0 0 24px 24px;padding:calc(16px + env(safe-area-inset-top)) 18px 18px;max-height:100%;overflow:auto}
-.seg{display:flex;gap:6px}.seg button{flex:1;background:var(--bg)}
-.bar{height:8px;background:var(--b);border-radius:6px;overflow:hidden;margin:6px 0 12px}.bar div{height:100%;background:var(--g2)}
-.lgd{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;font-size:12px;margin:10px 0}.lgd b{float:right}
-.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
-.tr{display:flex;align-items:flex-end;gap:10px;height:120px;margin:10px 0}.tr div{flex:1;text-align:center;font-size:11px;color:var(--m)}
-.tr em{display:inline-block;width:42%;border-radius:6px 6px 0 0;vertical-align:bottom}
-.mt{display:flex;gap:10px;align-items:center}.mt input{width:130px}
-</style></head><body><div id="app"></div><nav id="nv"></nav><div id="sb" style="position:fixed;left:0;bottom:0;visibility:hidden;pointer-events:none;padding-bottom:env(safe-area-inset-bottom)"></div><div id="ptr"></div><div id="md"></div>
-<script>
-const API='https://script.google.com/macros/s/AKfycbyaMArG_cfv3yzuVE5EfWGkm0weXQgcfxgXoKi85deVyOxTcHb0XOHGcdtXeaNCbKvdrQ/exec';
-const P={"refresh":"<path d='M20 11a8 8 0 10-2.3 6.3M20 4v7h-7'/>","trash": "<path d='M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3'/>","home": "<path d=\"M3 11l9-8 9 8\"/><path d=\"M5 10v10h14V10\"/>", "chart": "<path d=\"M4 20V11M10 20V4M16 20v-6M2 20h20\"/>", "plus": "<path d=\"M12 5v14M5 12h14\"/>", "target": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"12\" cy=\"12\" r=\"5\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/>", "user": "<circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7\"/>", "down": "<path d=\"M12 5v14M6 13l6 6 6-6\"/>", "up": "<path d=\"M12 19V5M6 11l6-6 6 6\"/>", "trend": "<path d=\"M3 17l6-6 4 4 8-8M15 7h6v6\"/>", "note": "<path d=\"M5 3h14v18H5zM9 8h6M9 12h6M9 16h3\"/>", "clock": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5l3 2\"/>", "leaf": "<path d=\"M5 19c0-9 5-14 15-14 0 10-5 15-14 15M5 19l8-8\"/>", "alert": "<path d=\"M12 3l10 18H2zM12 10v5M12 18v.5\"/>", "moon": "<path d=\"M20 14A8 8 0 1110 4a7 7 0 0010 10z\"/>", "bolt": "<path d=\"M13 2L4 14h7l-1 8 9-12h-7z\"/>", "coin": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v10M9.5 9.5h4a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3h4\"/>"};
-const svg=(n,z=20)=>`<svg width=${z} height=${z} viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=1.9 stroke-linecap=round stroke-linejoin=round style="vertical-align:middle">${P[n]}</svg>`;
-document.addEventListener('gesturestart',e=>e.preventDefault());
-const $=s=>document.querySelector(s);
-const fm=v=>'R$ '+(+v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-const hoje=()=>new Date().toLocaleDateString('sv-SE');
-const CG=['Alimentação','Mercado','Combustível','Transporte','Moradia','Contas','Saúde','Lazer','Compras','Educação','Outros'],
-CL={gasto:CG,ganho:['Salário','Extra','Rendimentos'],invest:['Renda fixa','Ações','FIIs','Cripto','Outros']},
-COR=['#14402f','#2f7a52','#5ea876','#a9c98b','#8fa89a','#c9d9b8','#6b8f71','#3d5a4a','#7fb069','#4f8a6b','#b7c9a8'],cor=c=>COR[Math.max(0,CG.indexOf(c))%COR.length];
-let aberto=null,swiped=false;
-let S={ct:'',t:'',u:null,l:[],m:[],v:'home',w:'todos',mes:hoje().slice(0,7),d:0};
-try{S.t=localStorage.t||'';S.d=+localStorage.d||0}catch(e){}
-const save=(k,v)=>{try{localStorage[k]=v}catch(e){}};
-async function api(a,p={}){try{const r=await fetch(API,{method:'POST',body:JSON.stringify({a,t:S.t,...p})});return await r.json()}catch(e){return{err:'rede'}}}
-const sum=(a,t)=>a.filter(x=>x.tipo==t).reduce((s,x)=>s+ +x.valor,0);
-const items=(m=S.mes,w=S.w)=>S.l.filter(x=>String(x.data).slice(0,7)==m&&(w=='todos'||x.usuario==w));
-const theme=()=>document.documentElement.toggleAttribute('data-d',!!S.d);
-
-function login(msg=''){theme();document.documentElement.classList.add('lgn');$('#nv').innerHTML='';$('#app').innerHTML=`<div class=lg><div><h1>Seu Dinheiro,<br><span>Melhores Dias</span></h1><p>Controle gastos, ganhos e investimentos da família em um só lugar.</p>
-<input id=e type=email placeholder="E-mail" autocomplete=username autocapitalize=off><input id=s type=password placeholder="Senha" autocomplete=current-password onkeydown="if(event.key=='Enter')entrar()">
-<div class=er>${msg}</div><button class=bt id=bl onclick=entrar()>Entrar →</button></div></div>`;$('#md').innerHTML=''}
-async function entrar(){const b=$('#bl');b.textContent='Entrando...';const r=await api('login',{email:$('#e').value,senha:$('#s').value});if(r.err)return login({email:'E-mail não cadastrado',senha:'Senha incorreta',auth:'E-mail ou senha inválidos',bloqueado:'Muitas tentativas. Aguarde 15 minutos.',config:'Servidor sem SALT configurado (veja o Code.gs)',rede:'Sem conexão com o servidor (confira a implantação do Apps Script)'}[r.err]||'Erro: '+r.err);S.t=r.t;save('t',r.t);document.activeElement&&document.activeElement.blur();fixaTela();load()}
-async function load(){const r=await api('lista');if(r.err)return login();S.u=r.u;S.l=r.l.sort((a,b)=>a.data<b.data?1:-1);S.m=r.m;go();fixaTela()}
-function sair(){S.t='';save('t','');login()}
-
-function lembretes(){const mine=items(S.mes,S.u.nome),a=[],mm=hoje().slice(0,7);
-if(!S.m.length)a.push(['target','Você ainda não configurou suas metas. Vá em Metas.']);
-else if(!S.m.some(x=>x.mes_lancado==mm))a.push(['target','Você não atualizou suas metas neste mês.']);
-if(!mine.length)a.push(['note','Você ainda não fez lançamentos neste mês.']);
-else{const dias=Math.floor((Date.now()-new Date(S.l.find(x=>x.usuario==S.u.nome).data))/864e5);if(dias>3)a.push(['clock',`Faz ${dias} dias sem lançamentos seus.`])}
-const mi=S.m.find(x=>x.categoria=='INVESTIR'),inv=sum(mine,'invest');
-if(mi&&inv<mi.valor)a.push(['trend',`Faltam ${fm(mi.valor-inv)} para sua meta de investimento.`]);
-return a.map(([i,t])=>`<div class=al>${svg(i)}<span>${t}</span></div>`).join('')}
-
-const filtros=()=>{const us=[...new Set([S.u.nome,...S.l.map(x=>x.usuario)])];
-return `<div class=chips><input type=month value="${S.mes}" onchange="S.mes=this.value;go()">${['todos',...us].map(u=>`<button class="ch ${S.w==u?'on':''}" onclick="S.w='${u}';go()">${u=='todos'?'Todos':u}</button>`).join('')}</div>`};
-const lista=(a,sw=1)=>a.length?a.map(x=>{const n=x.tipo!='ganho',ic=svg({gasto:'down',ganho:'up',invest:'trend'}[x.tipo],18);
-return `<div class=sw><button class=trash onclick="del('${x.id}')" aria-label=Excluir>${svg('trash',20)}</button><div class=tx onclick="ed('${x.id}')"><div class=ic>${ic}</div><div><b>${x.descricao}</b><small>${x.categoria} · ${x.usuario}${x.origem&&x.origem!='app'?' · '+svg('bolt',11)+' auto':''}</small></div><div style="text-align:right"><b class="${n?'neg':'pos'}">${n?'-':'+'} ${fm(x.valor)}</b><small>${String(x.data).slice(8,10)}/${String(x.data).slice(5,7)}</small></div></div></div>`}).join(''):'<p class=pad><small>Nenhum lançamento neste período.</small></p>';
-
-function home(){const it=items(),g=sum(it,'ganho'),d=sum(it,'gasto'),i=sum(it,'invest');
-return `<div class=hd><div><b style="font-size:18px">Olá, ${S.u.nome}</b><small>Vamos construir um futuro melhor</small></div></div>${filtros()}
-<div class=bal><small>Saldo do mês</small><h1>${fm(g-d-i)}</h1><div class=row3><span>${svg('up',14)} ${fm(g)}<i>Ganhos</i></span><span>${svg('down',14)} ${fm(d)}<i>Gastos</i></span><span>${svg('trend',14)} ${fm(i)}<i>Investido</i></span></div></div>
-${lembretes()}<div class=sec><b>Transações recentes</b></div><div class=card>${lista(it.slice(0,15))}</div>`}
-
-function ana(){const it=items().filter(x=>x.tipo=='gasto'),tot=sum(it,'gasto'),
-by=[...new Set(it.map(x=>x.categoria))].map(c=>[c,it.filter(x=>x.categoria==c).reduce((s,x)=>s+ +x.valor,0),it.filter(x=>x.categoria==c).length]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);let off=0;
-const arcs=by.map(([c,v],k)=>{const l=v/tot*251.3,s=`<circle r=40 cx=50 cy=50 fill=none stroke="${cor(c)}" stroke-width=14 stroke-dasharray="${l} 251.3" stroke-dashoffset="${-off}" transform="rotate(-90 50 50)"/>`;off+=l;return s}).join('');
-const ms=[...Array(6)].map((_,k)=>{const d=new Date();d.setDate(1);d.setMonth(d.getMonth()-5+k);return d.toLocaleDateString('sv-SE').slice(0,7)}),
-dt=ms.map(m=>[m,sum(items(m),'ganho'),sum(items(m),'gasto')]),mx=Math.max(1,...dt.map(x=>Math.max(x[1],x[2])));
-const lim=S.m.filter(x=>CG.includes(x.categoria)).reduce((s,x)=>s+ +x.valor,0),mine=sum(items(S.mes,S.u.nome),'gasto');
-const msg=lim?(mine<=lim?svg('leaf')+`<span>Você está ${Math.round((1-mine/lim)*100)}% abaixo do orçamento. Ótimo!</span>`:svg('alert')+`<span>Você passou ${fm(mine-lim)} do orçamento.</span>`):svg('target')+'<span>Defina limites em Metas para acompanhar seu orçamento.</span>';
-return `<div class=hd><b style="font-size:20px">Analytics</b></div>${filtros()}
-<div class=card style="padding:16px"><b>Seus gastos</b><div style="position:relative;max-width:230px;margin:10px auto"><svg viewBox="0 0 100 100">${arcs||'<circle r=40 cx=50 cy=50 fill=none stroke="var(--b)" stroke-width=14 />'}</svg>
-<div style="position:absolute;inset:0;display:grid;place-content:center;text-align:center"><b style="font-size:18px">${fm(tot)}</b><small>Total gasto</small></div></div>
-<div class=lgd>${by.map(([c,v])=>`<span><i class=dot style="background:${cor(c)}"></i>${c}<b>${Math.round(v/tot*100)}%</b></span>`).join('')}</div></div>
-<div class=al>${msg}</div>
-<div class=card style="padding:16px"><b>Gastos por categoria</b><small>${by.length?`Maior consumo: ${by[0][0]} (${Math.round(by[0][1]/tot*100)}% do total). Toque para ver os lançamentos.`:'Sem gastos neste período.'}</small>
-${by.map(([c,v,q])=>{const lm=+((S.m.find(x=>x.categoria==c)||{}).valor||0),o=S.ct==c;return `<div class=cat onclick="S.ct=S.ct=='${c}'?'':'${c}';go()"><div class=mt><i class=dot style="background:${cor(c)};margin:0"></i><b style="flex:1">${c}</b><b>${fm(v)}</b></div><div class=bar><div style="width:${v/by[0][1]*100}%;background:${cor(c)}"></div></div><small>${Math.round(v/tot*100)}% do total · ${q} lançamento${q>1?'s':''}${lm?` · meta ${fm(lm)} (${Math.round(v/lm*100)}%)`:''}</small>${o?`<div style="margin-top:6px" onclick="event.stopPropagation()">${lista(it.filter(x=>x.categoria==c))}</div>`:''}</div>`}).join('')}</div>
-<div class=card style="padding:16px"><b>Ganhos × Gastos (6 meses)</b><div class=tr>${dt.map(([m,g,d])=>`<div><em style="height:${g/mx*100}px;background:var(--g3)"></em><em style="height:${d/mx*100}px;background:var(--g)"></em><br>${m.slice(5)}/${m.slice(2,4)}</div>`).join('')}</div><small>Claro = ganhos · Escuro = gastos</small></div>
-<div class=card style="padding:16px"><b>Maiores gastos</b>${lista([...it].sort((a,b)=>b.valor-a.valor).slice(0,5))}</div>`}
-
-function metas(){const mine=items(S.mes,S.u.nome),mv=k=>(S.m.find(x=>x.categoria==k)||{}).valor||'';
-const row=(k,nome,real,inv)=>{const v=+mv(k),p=v?Math.min(100,real/v*100):0,bad=!inv&&v&&real>v;
-return `<div><div class=mt><b style="flex:1">${nome}</b><input data-k="${k}" type=number inputmode=decimal placeholder="Meta R$" value="${mv(k)}"></div>${v?`<div class=bar><div style="width:${p}%;${bad?'background:var(--r)':''}"></div></div><small>${fm(real)} de ${fm(v)}</small>`:''}</div>`};
-return `<div class=hd><b style="font-size:20px">Metas</b></div><small>Valores mensais de ${S.u.nome}. Gastos = limite; Ganhos/Investir = objetivo.</small>
-<div class=card style="padding:16px;display:grid;gap:10px">${row('GANHAR',svg('coin',18)+' Ganhar',sum(mine,'ganho'),1)}${row('INVESTIR',svg('trend',18)+' Investir',sum(mine,'invest'),1)}${CG.map(c=>row(c,c,mine.filter(x=>x.tipo=='gasto'&&x.categoria==c).reduce((s,x)=>s+ +x.valor,0))).join('')}</div>
-<button class=bt onclick=svMetas()>Salvar metas</button>`}
-async function svMetas(){const m=[...document.querySelectorAll('[data-k]')].filter(i=>+i.value>0).map(i=>({categoria:i.dataset.k,valor:+i.value}));await api('metas',{m});load()}
-
-function perfil(){setTimeout(()=>{ancora();const e=$('#dg');if(e)e.textContent='diag: '+(window.__d||[]).join(' / ')},200);return `<div class=hd><b style="font-size:20px">Perfil</b></div><div class=card style="padding:16px;text-align:center"><div class=ic style="margin:0 auto 8px;width:64px;height:64px;font-size:26px">${S.u.nome[0]}</div><b>${S.u.nome}</b><small>${S.u.email}</small></div>
-<div class=card style="padding:16px"><div class=mt><b style="flex:1">${svg('moon',18)} Modo escuro</b><button class="ch ${S.d?'on':''}" onclick="S.d=S.d?0:1;save('d',S.d);theme();go()">${S.d?'Ligado':'Desligado'}</button></div></div>
-<div class=card style="padding:16px"><b>Alterar senha</b><input id=pa type=password placeholder="Senha atual"><input id=pn type=password placeholder="Nova senha (mín. 6)"><small id=pm></small><button class=bt onclick=senha()>Atualizar senha</button></div>
-<button class=ln onclick=sair()>Sair da conta</button><small style="text-align:center">Versão 7</small><small id=dg style="text-align:center;font-size:10px;opacity:.7"></small>`}
-async function senha(){const n=$('#pn').value;if(n.length<6)return $('#pm').textContent='A nova senha precisa ter 6+ caracteres';const r=await api('senha',{atual:$('#pa').value,nova:n});$('#pm').textContent=r.err||'Senha alterada com sucesso'}
-
-function addM(tp='gasto'){$('#md').innerHTML=`<div class=sh><div class=seg>${[['gasto','Gasto'],['ganho','Ganho'],['invest','Investimento']].map(([k,n])=>`<button class="${k==tp?'on':''}" onclick="addM('${k}')">${n}</button>`).join('')}</div>
-<input id=v type=number step=0.01 inputmode=decimal placeholder="Valor R$"><select id=c>${CL[tp].map(c=>`<option>${c}</option>`).join('')}</select><input id=ds placeholder="Descrição"><input id=dt type=date value="${hoje()}">
-<button class=bt onclick="sv('${tp}')">Salvar</button><button class=ln onclick="fechaM()">Cancelar</button></div>`}
-async function sv(tp){const v=+$('#v').value;if(!v)return;await api('add',{x:{tipo:tp,valor:v,categoria:$('#c').value,descricao:$('#ds').value||$('#c').value,data:$('#dt').value}});fechaM();load()}
-function ed(id){if(swiped){swiped=false;return}if(aberto){fecha();return}const x=S.l.find(l=>l.id==id);if(!x)return;const cs=CL[x.tipo].includes(x.categoria)?CL[x.tipo]:[x.categoria,...CL[x.tipo]];
-$('#md').innerHTML=`<div class=sh><b>Editar lançamento</b><small>${x.usuario} · ${String(x.data).slice(8,10)}/${String(x.data).slice(5,7)}</small><select id=ec>${cs.map(c=>`<option ${c==x.categoria?'selected':''}>${c}</option>`).join('')}</select><input id=edd value="${String(x.descricao).replace(/"/g,'&quot;')}"><input id=ev type=number step=0.01 inputmode=decimal value="${x.valor}">
-<button class=bt onclick="svEd('${id}')">Salvar alterações</button><button class=ln onclick="fechaM()">Cancelar</button></div>`}
-async function svEd(id){const v=+$('#ev').value;if(!v)return;await api('edit',{id,x:{categoria:$('#ec').value,descricao:$('#edd').value,valor:v}});fechaM();load()}
-function fechaM(){document.activeElement&&document.activeElement.blur();const m=$('#md');m.innerHTML='';m.removeAttribute('style');fixaTela()}
-async function del(id){if(confirm('Excluir este lançamento?')){await api('del',{id});aberto=null;load()}else fecha()}
-function fecha(){if(aberto){aberto.style.transform='';aberto=null}}
-function fixaTela(){[0,60,250,600].forEach(t=>setTimeout(()=>{scrollTo(0,0);document.documentElement.scrollTop=0;document.body.scrollTop=0},t))}
-document.addEventListener('focusout',fixaTela);
-if(window.visualViewport){const f=()=>{const m=$('#md'),v=visualViewport;m.style.bottom='auto';m.style.top=v.offsetTop+'px';m.style.height=v.height+'px'};visualViewport.addEventListener('resize',()=>{f();fixaTela()});visualViewport.addEventListener('scroll',f)}
-let sx=0,sy=0,dx=0,cur=null,mv=false;
-document.addEventListener('touchstart',e=>{const t=e.target.closest('.sw>.tx');if(aberto&&aberto!==t)fecha();if(!t)return;cur=t;sx=e.touches[0].clientX;sy=e.touches[0].clientY;dx=0;mv=false;t.style.transition='none'},{passive:true});
-document.addEventListener('touchmove',e=>{if(!cur)return;dx=e.touches[0].clientX-sx;const dy=e.touches[0].clientY-sy;if(!mv&&Math.abs(dx)>10&&Math.abs(dx)>Math.abs(dy))mv=true;if(mv)cur.style.transform=`translateX(${Math.max(-72,Math.min(0,(cur===aberto?-72:0)+dx))}px)`},{passive:true});
-document.addEventListener('touchend',()=>{if(!cur)return;cur.style.transition='';if(mv){swiped=true;setTimeout(()=>swiped=false,350);if((cur===aberto?-72:0)+dx<-36){cur.style.transform='translateX(-72px)';aberto=cur}else{cur.style.transform='';if(aberto===cur)aberto=null}}cur=null});
-
-function go(){theme();document.documentElement.classList.remove('lgn');const V={home,ana,metas,perfil};$('#app').innerHTML=`<div id=pg>${V[S.v]()}</div>`;$('#nv').innerHTML=`${[['home','home','Início'],['ana','chart','Analytics']].map(nb).join('')}<button class=fab onclick=addM()>${svg('plus',28)}</button>${[['metas','target','Metas'],['perfil','user','Perfil']].map(nb).join('')}`;ancora()}
-const nb=([k,i,n])=>`<button class="${S.v==k?'on':''}" onclick="S.v='${k}';go();$('#app').scrollTop=0"><span>${svg(i,24)}</span>${n}</button>`;
-
-// Ajusta o menu à base da tela (a zona do indicador do iPhone fica na mesma cor do menu)
-function ancora(){const n=$('#nv');if(!n||!n.innerHTML)return;const v=window.visualViewport,sa=!!navigator.standalone;
-if(v&&v.height<Math.max(innerHeight,screen.height)*.75){n.style.display='none';return}n.style.display='';n.style.bottom='0px';
-const sb=parseFloat(getComputedStyle($('#sb')).paddingBottom)||0,dz=sa?Math.max(0,screen.height-innerHeight):0;
-n.style.setProperty('--pb',Math.max(8,sb-dz)+'px');window.__d=[innerHeight,screen.height,v?Math.round(v.height):'-',sb,Math.round(dz),sa?'app':'safari']}
+function ancora(){const n=$('#nv');if(!n||!n.innerHTML)return;const v=window.visualViewport;
+if(v&&v.height<window.innerHeight*.75){n.style.display='none';return}
+n.style.display='';n.style.bottom='0px';navPlace()}
 ['resize','orientationchange','focusout','pageshow'].forEach(e=>addEventListener(e,()=>{ancora();setTimeout(ancora,150);setTimeout(ancora,600)}));
 if(window.visualViewport){visualViewport.addEventListener('resize',ancora);visualViewport.addEventListener('scroll',ancora)}
 setInterval(ancora,1500);
